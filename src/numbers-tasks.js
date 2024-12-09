@@ -176,8 +176,9 @@ function getParallelepipedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-  const div = 10 ** pow;
-  return Math.round(num / div) * div;
+  const decimal = pow > 0 ? num / 10 ** pow : num;
+  const rounded = Math.round(decimal);
+  return rounded * 10 ** pow;
 }
 
 /**
@@ -198,10 +199,10 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
-  for (let x = 2; x < n; x + 1) {
-    if (n % x === 0) {
-      return false;
-    }
+  if (n === 2 || n === 3) return true;
+  if (n <= 1 || n % 2 === 0 || n % 3 === 0) return false;
+  for (let i = 5; i * i <= n; i += 6) {
+    if (n % i === 0 || n % (i + 2) === 0) return false;
   }
   return true;
 }
@@ -654,20 +655,20 @@ module.exports = {
   isPowerOfTwo,
   getSine,
   numberToStringInBase,
-  isSafeInteger,
-  roundToLargestInteger,
-  roundToSmallestInteger,
-  roundToNearestInteger,
-  getSumOfNumbers,
-  isNumber,
-  isInteger,
   toExponential,
   toFixed,
   toPrecision,
   getNumberValue,
+  isNumber,
+  isInteger,
   getFloatOnString,
   getIntegerOnString,
+  isSafeInteger,
+  roundToSmallestInteger,
+  roundToLargestInteger,
+  roundToNearestInteger,
   getIntegerPartNumber,
+  getSumOfNumbers,
   getMaxNumber,
   getRandomInteger,
   getHypotenuse,
